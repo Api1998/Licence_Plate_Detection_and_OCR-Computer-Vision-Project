@@ -1,5 +1,4 @@
 import ast
-
 import cv2
 import numpy as np
 import pandas as pd
@@ -39,7 +38,7 @@ def draw_border(
 results = pd.read_csv("./test_interpolated.csv")
 
 # load video
-video_path = "sample.mp4"
+video_path = "sample.mp4"   #  provide the correct video file name
 cap = cv2.VideoCapture(video_path)
 
 fourcc = cv2.VideoWriter_fourcc(*"mp4v")  # Specify the codec

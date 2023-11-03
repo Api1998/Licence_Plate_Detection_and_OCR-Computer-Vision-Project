@@ -8,32 +8,32 @@ mot_tracker = Sort()
 
 # load models
 coco_model = YOLO("yolov8n.pt")
-# licence_plate_detector = YOLO("runs\detect\train2\weights\best.pt")
+licence_plate_detector = YOLO("Model\Licence_plate_model.pt")   # provie the path to trained model
 
-licence_plate_detector = YOLO(
-    "/content/gdrive/My Drive/CV - PROJECT/data set - drive/runs/detect/train2/weights/best.pt"
-)
+#licence_plate_detector = YOLO(
+#    "/content/gdrive/My Drive/model.pt"
+#)
 
 
 # load video
-# cap_video = cv2.VideoCapture("sample.mp4")
+cap_video = cv2.VideoCapture("sample.mp4")  # provide your video file name here
 
-cap_video = cv2.VideoCapture(
-    "/content/gdrive/My Drive/CV - PROJECT/data set - drive/sample.mp4"
-)
+#cap_video = cv2.VideoCapture(
+#    "/content/gdrive/My Drive/sample.mp4"
+#)
 vehicles = [2, 3, 5, 7]
 
 # read frames
 ret = True
 frame_count = -1
 while ret:
-    if frame_count < 10:
-        break
-    results[frame_count] = {}
+    #if frame_count < 10:
+    #    break
+
     frame_count += 1
     ret, frame = cap_video.read()
     if ret:
-        pass
+        results[frame_count] = {}
 
         # detect vehicles
         detections = coco_model(frame)[0]
@@ -72,10 +72,11 @@ while ret:
                 )
 
                 if license_plate_text is not None:
+                    # store the results of license plates
                     results[frame_count][car_id] = {
                         "car": {"bbox": [xcar1, ycar1, xcar2, ycar2]},
                         "license_plate": {
-                            bbox: [x1, y1, x2, y2],
+                            "bbox": [x1, y1, x2, y2],
                             "text": license_plate_text,
                             "bbox_score": score,
                             "text_score": license_plate_text_score,
@@ -83,6 +84,6 @@ while ret:
                     }
 
 # write results
-# write_csv(results, "test.csv")
+write_csv(results, "test.csv")  # you can provide a name to write your csv file
 
-write_csv(results, "/content/gdrive/My Drive/CV - PROJECT/data set - drive/test.csv")
+#write_csv(results, "/content/gdrive/My Drive/test.csv")
