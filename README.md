@@ -33,6 +33,7 @@ Install all the required dependecies by running this command after the cloning.
 ```python
 pip install -r requirements.txt
 ```
+Clone [this repository](https://github.com/abewley/sort) to the same directory as main.py to download sort modules which will be needed to run the project
 
 ### Installation
 
